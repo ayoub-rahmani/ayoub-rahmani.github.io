@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Car, Truck, Hospital, CreditCard } from "lucide-react"
+import { ExternalLink, Github, Car, Truck, Heart, CreditCard } from "lucide-react"
 
 export function Projects() {
   const [isVisible, setIsVisible] = useState(false)
@@ -47,7 +47,7 @@ export function Projects() {
       color: "bg-green-500/10 border-green-500/20",
     },
     {
-      icon: Hospital,
+      icon: Heart,
       title: "Radiology Center",
       description:
         "Medical facility management system with PDF reporting capabilities. Streamlines patient records, appointment scheduling, and report generation.",
