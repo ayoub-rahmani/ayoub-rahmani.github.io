@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 
 export function Hero() {
@@ -29,6 +30,14 @@ export function Hero() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className={`transition-all duration-1000 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+          {/* Profile Picture */}
+          <div className="flex justify-center mb-8">
+            <Avatar className="w-32 h-32 border-4 border-primary/20 shadow-xl">
+              <AvatarImage src="/placeholder-user.jpg" alt="Ayoub Rahmani" />
+              <AvatarFallback className="text-2xl">AR</AvatarFallback>
+            </Avatar>
+          </div>
+
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6 text-balance">
             Hi there, I'm <span className="gradient-text">Ayoub Rahmani</span>
             <span className="animate-pulse">👋</span>
