@@ -18,13 +18,13 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20" />
 
       {/* Floating elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full animate-float" />
+      <div className="absolute top-20 left-10 w-20 h-20 bg-cyan-500/10 rounded-full blur-xl animate-float" />
       <div
-        className="absolute bottom-32 right-16 w-16 h-16 bg-accent/10 rounded-full animate-float"
+        className="absolute bottom-32 right-16 w-16 h-16 bg-blue-500/10 rounded-full blur-xl animate-float"
         style={{ animationDelay: "2s" }}
       />
       <div
-        className="absolute top-1/2 right-20 w-12 h-12 bg-primary/5 rounded-full animate-float"
+        className="absolute top-1/2 right-20 w-12 h-12 bg-purple-500/10 rounded-full blur-xl animate-float"
         style={{ animationDelay: "4s" }}
       />
 
