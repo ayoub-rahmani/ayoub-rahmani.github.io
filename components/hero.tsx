@@ -101,7 +101,7 @@ export function Hero() {
                             {[
                                 { href: "https://github.com/ayoub-rahmani", icon: Github, label: "GitHub" },
                                 { href: "https://www.linkedin.com/in/ayoub-rahmani-linkêdin", icon: Linkedin, label: "LinkedIn" },
-                                { href: "https://youtube.com/@ayoub-rahmani", icon: Youtube, label: "YouTube" },
+                                { href: "https://www.youtube.com/@AyoubRahmaniDev", icon: Youtube, label: "YouTube" },
                             ].map(({ href, icon: Icon, label }) => (
                                 <a
                                     key={label}

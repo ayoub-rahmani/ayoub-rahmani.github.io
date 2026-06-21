@@ -25,7 +25,7 @@ export function Projects() {
                 "Production React Native app for doctors — centralizing appointments, patient records, consultations, secure messaging, and video teleconsultation via Jitsi. Embedded AI clinical assistant powered by BioMistral 7B. K6 load test: p(95) at 282ms, 0% failure rate.",
             stack: ["React Native", "TypeScript", "NestJS", "PostgreSQL", "TypeORM", "Jitsi SDK", "BioMistral 7B"],
             github: null,
-            youtube: null,
+            youtube: "https://www.youtube.com/watch?v=kbEGEfk9CkQ",
             private: true,
             privateNote: "Company NDA — MedCity Connect",
             highlight: "19/20 — Highest in graduating class",
@@ -47,22 +47,13 @@ export function Projects() {
 
     const projects = [
         {
-            name: "Deliverini TN",
-            period: "May 2025",
+            name: "Radiology Center",
+            period: "Oct 2024",
             description:
-                "Cross-platform food delivery app for Android and iOS. Real-time order tracking, Firebase Firestore sync, live chat between customers and restaurants. Bilingual Arabic RTL/French interface at 60fps.",
-            stack: ["Flutter", "Firebase", "Dart"],
-            github: "https://github.com/ayoub-rahmani/Deliverini_TN",
-            youtube: "https://youtube.com/@ayoub-rahmani",
-        },
-        {
-            name: "Smart Checkout",
-            period: "Aug 2025",
-            description:
-                "Mobile checkout app integrated with Instagram for managing product catalogs from social media. Real-time analytics dashboard with revenue tracking, sales trends, and automated stock alerts.",
-            stack: ["Flutter", "Dart"],
-            github: "https://github.com/ayoub-rahmani/Smart_Checkout",
-            youtube: "https://youtube.com/@ayoub-rahmani",
+                "Terminal-based system managing radiology exams, appointments, and billing. Automated PDF report generation — cut manual reporting work by 45%. Comprehensive patient search and exam history tracking.",
+            stack: ["Java", "JavaFX", "PDF Generation"],
+            github: "https://github.com/ayoub-rahmani/Radiology_Center",
+            youtube: null,
         },
         {
             name: "Auto-École Pro",
@@ -71,15 +62,24 @@ export function Projects() {
                 "Enterprise driving school management system. Intelligent scheduling with multi-entity conflict detection, OpenStreetMap integration, PDF reports, role-based access control, and a MySQL backend with 17+ modules.",
             stack: ["Java", "JavaFX", "MySQL"],
             github: "https://github.com/ayoub-rahmani/Driving_school_Pro",
-            youtube: "https://youtube.com/@ayoub-rahmani",
+            youtube: "https://www.youtube.com/watch?v=gXRtK-GG6nI",
         },
         {
-            name: "Radiology Center",
-            period: "Oct 2024",
+            name: "Deliverini TN",
+            period: "May 2025",
             description:
-                "Terminal-based system managing radiology exams, appointments, and billing. Automated PDF report generation — cut manual reporting work by 45%. Comprehensive patient search and exam history tracking.",
-            stack: ["Java", "PDF Generation"],
-            github: "https://github.com/ayoub-rahmani/Radiology_Center",
+                "Cross-platform food delivery app for Android and iOS. Real-time order tracking, Firebase Firestore sync, live chat between customers and restaurants. Bilingual Arabic RTL/French interface at 60fps.",
+            stack: ["Flutter", "Firebase", "Dart"],
+            github: "https://github.com/ayoub-rahmani/Deliverini_TN",
+            youtube: "https://www.youtube.com/watch?v=4YPkkX-7DxA",
+        },
+        {
+            name: "Smart Checkout",
+            period: "Aug 2025",
+            description:
+                "Mobile checkout app integrated with Instagram for managing product catalogs from social media. Real-time analytics dashboard with revenue tracking, sales trends, and automated stock alerts.",
+            stack: ["Flutter", "Dart"],
+            github: "https://github.com/ayoub-rahmani/Smart_Checkout",
             youtube: null,
         },
         {
@@ -116,7 +116,20 @@ export function Projects() {
                                     <h3 className="text-white text-xl font-bold">{p.name}</h3>
                                     <p className="text-sky-400 text-xs font-mono mt-0.5">{p.subtitle}</p>
                                 </div>
-                                <span className="font-mono text-slate-600 text-xs flex-shrink-0 ml-4">{p.period}</span>
+                                <div className="flex items-center gap-2 ml-4 flex-shrink-0">
+                                    {p.youtube && (
+                                        <a
+                                            href={p.youtube}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-1.5 font-mono text-xs text-rose-400 hover:text-rose-300 border border-rose-500/20 hover:border-rose-400/40 px-2 py-1 transition-colors"
+                                        >
+                                            <Youtube className="h-3 w-3" />
+                                            Demo
+                                        </a>
+                                    )}
+                                    <span className="font-mono text-slate-600 text-xs">{p.period}</span>
+                                </div>
                             </div>
 
                             {p.private && (
@@ -145,7 +158,7 @@ export function Projects() {
                     ))}
                 </div>
 
-                {/* Other projects — 2-col grid to avoid empty cell */}
+                {/* Other projects — 2-col grid, no empty cells */}
                 <div className="grid md:grid-cols-2 gap-px bg-slate-800">
                     {projects.map((p) => (
                         <div key={p.name} className="bg-[#0a0a0f] p-6 flex flex-col hover:bg-slate-900/40 transition-colors group">
@@ -192,17 +205,7 @@ export function Projects() {
                 </div>
 
                 {/* Footer links */}
-                <div className="mt-10 flex items-center justify-between">
-                    <a
-                        href="https://youtube.com/@ayoub-rahmani"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 font-mono text-xs text-slate-500 hover:text-rose-400 transition-colors"
-                    >
-                        <Youtube className="h-3.5 w-3.5" />
-                        Watch demos on YouTube
-                        <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
+                <div className="mt-10 flex items-center justify-end">
                     <a
                         href="https://github.com/ayoub-rahmani"
                         target="_blank"

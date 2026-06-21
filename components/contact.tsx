@@ -39,7 +39,7 @@ export function Contact() {
             icon: Youtube,
             label: "YouTube",
             value: "@ayoub-rahmani",
-            href: "https://youtube.com/@ayoub-rahmani",
+            href: "https://www.youtube.com/@AyoubRahmaniDev",
         },
         {
             icon: Globe,
