@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ArrowUpRight, Download } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowUpRight, Download, Youtube } from "lucide-react"
 
 export function Hero() {
     const [isVisible, setIsVisible] = useState(false)
@@ -66,7 +66,7 @@ export function Hero() {
                             { value: "19/20", label: "Final Project Score" },
                             { value: "16.70", label: "Year Average / 20" },
                             { value: "IELTS 7.0", label: "C1 English" },
-                            { value: "6 sprints", label: "MedCity delivery" },
+                            { value: "0%", label: "K6 failure rate" },
                         ].map((stat) => (
                             <div key={stat.label} className="flex flex-col">
                                 <span className="font-mono text-white text-xl font-bold">{stat.value}</span>
@@ -101,6 +101,7 @@ export function Hero() {
                             {[
                                 { href: "https://github.com/ayoub-rahmani", icon: Github, label: "GitHub" },
                                 { href: "https://www.linkedin.com/in/ayoub-rahmani-linkêdin", icon: Linkedin, label: "LinkedIn" },
+                                { href: "https://youtube.com/@ayoub-rahmani", icon: Youtube, label: "YouTube" },
                             ].map(({ href, icon: Icon, label }) => (
                                 <a
                                     key={label}

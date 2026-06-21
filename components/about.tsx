@@ -25,7 +25,7 @@ export function About() {
             points: [
                 "Built a production React Native app for doctors centralizing appointments, patient records, and secure messaging.",
                 "Integrated Jitsi Meet SDK for encrypted video teleconsultation and deployed BioMistral 7B via FastAPI + llama.cpp as an embedded AI clinical assistant.",
-                "Delivered across 4 releases and 6 Scrum sprints. K6 load test: p(95) at 282ms, 0% failure rate.",
+                "Delivered on time with K6 load test results: p(95) at 282ms, 0% failure rate.",
                 "Final grade: 19/20 — highest score in graduating class.",
             ],
             stack: ["React Native", "TypeScript", "NestJS", "PostgreSQL", "Jitsi SDK", "BioMistral 7B"],

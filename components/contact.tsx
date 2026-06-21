@@ -36,6 +36,12 @@ export function Contact() {
             href: "https://www.linkedin.com/in/ayoub-rahmani-linkêdin",
         },
         {
+            icon: Youtube,
+            label: "YouTube",
+            value: "@ayoub-rahmani",
+            href: "https://youtube.com/@ayoub-rahmani",
+        },
+        {
             icon: Globe,
             label: "Website",
             value: "ayoub-rahmani.github.io",
