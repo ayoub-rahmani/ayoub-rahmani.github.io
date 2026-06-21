@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ArrowUpRight, Download, Youtube } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowUpRight, Youtube } from "lucide-react"
 
 export function Hero() {
     const [isVisible, setIsVisible] = useState(false)
@@ -16,26 +16,31 @@ export function Hero() {
 
     return (
         <section className="min-h-screen flex items-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
-            {/* Subtle grid background */}
+            {/* Dot-grid background — denser, more technical feel */}
             <div
-                className="absolute inset-0 opacity-[0.03]"
+                className="absolute inset-0 opacity-[0.035]"
                 style={{
-                    backgroundImage: `linear-gradient(#38bdf8 1px, transparent 1px), linear-gradient(90deg, #38bdf8 1px, transparent 1px)`,
-                    backgroundSize: "64px 64px",
+                    backgroundImage: `radial-gradient(circle, #38bdf8 1px, transparent 1px)`,
+                    backgroundSize: "32px 32px",
                 }}
             />
-            {/* Glow */}
-            <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-sky-500/5 rounded-full blur-3xl pointer-events-none" />
+            {/* Glow — shifted to bottom-left for asymmetry */}
+            <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-sky-500/4 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 max-w-5xl mx-auto w-full pt-24 pb-16">
                 <div
                     className="transition-all duration-700"
                     style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(24px)" }}
                 >
-                    {/* Status badge */}
-                    <div className="inline-flex items-center gap-2 mb-10 px-3 py-1.5 rounded-full border border-sky-500/20 bg-sky-500/5 text-sky-400 text-xs font-mono tracking-wider">
+                    {/* Terminal-style status line — more distinctive than a pill badge */}
+                    <div className="inline-flex items-center gap-3 mb-10 font-mono text-xs text-slate-500">
+                        <span className="text-sky-400">$</span>
+                        <span>status</span>
+                        <span className="text-slate-700">·</span>
                         <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-                        OPEN TO OPPORTUNITIES · JUNE 2026
+                        <span className="text-sky-400 tracking-wider">OPEN TO OPPORTUNITIES</span>
+                        <span className="text-slate-700">·</span>
+                        <span>June 2026</span>
                     </div>
 
                     {/* Name */}
@@ -60,15 +65,15 @@ export function Hero() {
                         Based in Tunisia — seeking a junior position or internship.
                     </p>
 
-                    {/* Stats row */}
-                    <div className="flex gap-8 mb-12 border-y border-slate-800 py-6">
+                    {/* Stats row — vertical dividers instead of border-y */}
+                    <div className="flex gap-0 mb-12">
                         {[
-                            { value: "19/20", label: "Final Project Score" },
-                            { value: "16.70", label: "Year Average / 20" },
+                            { value: "19/20", label: "Final Project" },
+                            { value: "16.70", label: "Year Average" },
                             { value: "IELTS 7.0", label: "C1 English" },
-                            { value: "0%", label: "K6 failure rate" },
-                        ].map((stat) => (
-                            <div key={stat.label} className="flex flex-col">
+                            { value: "0%", label: "K6 Failure Rate" },
+                        ].map((stat, i) => (
+                            <div key={stat.label} className={`flex flex-col pr-8 ${i > 0 ? "pl-8 border-l border-slate-800" : ""}`}>
                                 <span className="font-mono text-white text-xl font-bold">{stat.value}</span>
                                 <span className="text-slate-500 text-xs mt-1">{stat.label}</span>
                             </div>

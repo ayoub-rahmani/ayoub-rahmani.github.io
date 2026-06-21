@@ -45,7 +45,8 @@ export function Projects() {
         },
     ]
 
-    const projects = [
+    // Split into grid projects (2-col) and the last one that spans full width
+    const gridProjects = [
         {
             name: "Radiology Center",
             period: "Oct 2024",
@@ -82,16 +83,17 @@ export function Projects() {
             github: "https://github.com/ayoub-rahmani/Smart_Checkout",
             youtube: null,
         },
-        {
-            name: "Snake Battle Arena",
-            period: "Nov 2025",
-            description:
-                "Real-time multiplayer Snake for up to 4 players over a custom TCP client-server. Pre-game lobby, server-side collision detection, live game-state broadcasting, and JavaFX rendering.",
-            stack: ["Java", "JavaFX", "TCP Sockets"],
-            github: null,
-            youtube: null,
-        },
     ]
+
+    const wideProject = {
+        name: "Snake Battle Arena",
+        period: "Nov 2025",
+        description:
+            "Real-time multiplayer Snake for up to 4 players over a custom TCP client-server. Pre-game lobby, server-side collision detection, live game-state broadcasting, and JavaFX rendering.",
+        stack: ["Java", "JavaFX", "TCP Sockets"],
+        github: null,
+        youtube: null,
+    }
 
     return (
         <section
@@ -107,10 +109,10 @@ export function Projects() {
                     <div className="flex-1 h-px bg-slate-800" />
                 </div>
 
-                {/* Featured */}
+                {/* Featured — 2 cols */}
                 <div className="grid md:grid-cols-2 gap-px bg-slate-800 mb-px">
                     {featured.map((p) => (
-                        <div key={p.name} className="bg-[#0a0a0f] p-8 flex flex-col">
+                        <div key={p.name} className="bg-[#0a0a0f] p-8 flex flex-col group hover:bg-[#0c0c14] transition-colors">
                             <div className="flex items-start justify-between mb-2">
                                 <div>
                                     <h3 className="text-white text-xl font-bold">{p.name}</h3>
@@ -122,7 +124,7 @@ export function Projects() {
                                             href={p.youtube}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-1.5 font-mono text-xs text-rose-400 hover:text-rose-300 border border-rose-500/20 hover:border-rose-400/40 px-2 py-1 transition-colors"
+                                            className="inline-flex items-center gap-1.5 font-mono text-xs text-rose-400 hover:text-rose-300 border border-rose-500/30 hover:border-rose-400/60 px-2 py-1 transition-colors"
                                         >
                                             <Youtube className="h-3 w-3" />
                                             Demo
@@ -158,10 +160,13 @@ export function Projects() {
                     ))}
                 </div>
 
-                {/* Other projects — 2-col grid, no empty cells */}
-                <div className="grid md:grid-cols-2 gap-px bg-slate-800">
-                    {projects.map((p) => (
-                        <div key={p.name} className="bg-[#0a0a0f] p-6 flex flex-col hover:bg-slate-900/40 transition-colors group">
+                {/* Other projects — 2×2 grid, no empty cells */}
+                <div className="grid md:grid-cols-2 gap-px bg-slate-800 mb-px">
+                    {gridProjects.map((p) => (
+                        <div
+                            key={p.name}
+                            className="bg-[#0a0a0f] p-6 flex flex-col hover:bg-[#0c0c14] transition-colors group border-l-2 border-transparent hover:border-sky-500/40"
+                        >
                             <div className="flex items-start justify-between mb-1">
                                 <h3 className="text-white font-semibold">{p.name}</h3>
                                 <div className="flex items-center gap-2 ml-2 flex-shrink-0">
@@ -170,10 +175,11 @@ export function Projects() {
                                             href={p.youtube}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-slate-600 hover:text-rose-400 transition-colors"
+                                            className="inline-flex items-center gap-1 font-mono text-xs text-rose-400 hover:text-rose-300 transition-colors"
                                             aria-label="Watch demo on YouTube"
                                         >
-                                            <Youtube className="h-4 w-4" />
+                                            <Youtube className="h-3.5 w-3.5" />
+                                            <span className="text-[10px]">Demo</span>
                                         </a>
                                     )}
                                     {p.github ? (
@@ -204,7 +210,26 @@ export function Projects() {
                     ))}
                 </div>
 
-                {/* Footer links */}
+                {/* Snake Battle Arena — full-width horizontal card */}
+                <div className="bg-[#0a0a0f] border-t border-slate-800 p-6 flex flex-col sm:flex-row sm:items-center gap-6 hover:bg-[#0c0c14] transition-colors group border-l-2 border-transparent hover:border-sky-500/40">
+                    <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-1">
+                            <h3 className="text-white font-semibold">{wideProject.name}</h3>
+                            <Lock className="h-3.5 w-3.5 text-slate-700" />
+                            <span className="font-mono text-slate-600 text-xs">{wideProject.period}</span>
+                        </div>
+                        <p className="text-slate-500 text-xs leading-relaxed">{wideProject.description}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 sm:flex-col sm:items-end sm:gap-1.5 flex-shrink-0">
+                        {wideProject.stack.map((s) => (
+                            <span key={s} className="font-mono text-xs text-slate-600 border border-slate-800 px-1.5 py-0.5 whitespace-nowrap">
+                                {s}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Footer */}
                 <div className="mt-10 flex items-center justify-end">
                     <a
                         href="https://github.com/ayoub-rahmani"
