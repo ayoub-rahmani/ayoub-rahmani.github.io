@@ -1,148 +1,198 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Car, Truck, Heart, CreditCard } from "lucide-react"
+import { ArrowUpRight, Github, Lock } from "lucide-react"
 
 export function Projects() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+    const [isVisible, setIsVisible] = useState(false)
+    const sectionRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 },
-    )
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
+            { threshold: 0.05 }
+        )
+        if (sectionRef.current) observer.observe(sectionRef.current)
+        return () => observer.disconnect()
+    }, [])
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
+    const featured = [
+        {
+            name: "MedCity",
+            subtitle: "All-in-One Clinical Management App · PFE",
+            period: "Feb – Jun 2026",
+            description:
+                "Production React Native app for doctors — centralizing appointments, patient records, consultations, secure messaging, and video teleconsultation via Jitsi. Embedded AI clinical assistant powered by BioMistral 7B. Delivered across 4 releases and 6 Scrum sprints. K6 load test: p(95) at 282ms, 0% failure rate.",
+            stack: ["React Native", "TypeScript", "NestJS", "PostgreSQL", "TypeORM", "Jitsi SDK", "BioMistral 7B"],
+            github: null,
+            demo: null,
+            private: true,
+            privateNote: "Company NDA — MedCity Connect",
+            highlight: "19/20 — Highest in graduating class",
+        },
+        {
+            name: "Shadow Weaver",
+            subtitle: "Mobile 2D Platformer",
+            period: "Apr 2026",
+            description:
+                "A game built around one mechanic: the player never controls the character — they control the light. Shadows cast by floating obstacles become platforms. The player repositions a light source to sculpt shadow geometry in real time, building paths for an auto-running character.",
+            stack: ["Flutter", "Dart", "Flame Engine"],
+            github: null,
+            demo: null,
+            private: true,
+            privateNote: "Pending Google Play Store release",
+            highlight: null,
+        },
+    ]
 
-    return () => observer.disconnect()
-  }, [])
+    const projects = [
+        {
+            name: "Deliverini TN",
+            period: "May 2025",
+            description:
+                "Cross-platform food delivery app for Android and iOS. Real-time order tracking, Firebase Firestore sync, live chat between customers and restaurants. Bilingual Arabic RTL/French interface at 60fps.",
+            stack: ["Flutter", "Firebase", "Dart"],
+            github: "https://github.com/ayoub-rahmani/Deliverini_TN",
+            demo: null,
+        },
+        {
+            name: "Smart Checkout",
+            period: "Aug 2025",
+            description:
+                "Mobile checkout app integrated with Instagram for managing product catalogs from social media. Real-time analytics dashboard with revenue tracking, sales trends, and automated stock alerts.",
+            stack: ["Flutter", "Dart"],
+            github: "https://github.com/ayoub-rahmani/Smart_Checkout",
+            demo: null,
+        },
+        {
+            name: "Auto-École Pro",
+            period: "Feb 2025",
+            description:
+                "Enterprise driving school management system. Intelligent scheduling with multi-entity conflict detection, OpenStreetMap integration, PDF reports, role-based access control, and a MySQL backend with 17+ modules.",
+            stack: ["Java", "JavaFX", "MySQL"],
+            github: "https://github.com/ayoub-rahmani/Driving_school_Pro",
+            demo: null,
+        },
+        {
+            name: "Radiology Center",
+            period: "Oct 2024",
+            description:
+                "Terminal-based system managing radiology exams, appointments, and billing. Automated PDF report generation — cut manual reporting work by 45%. Comprehensive patient search and exam history tracking.",
+            stack: ["Java", "PDF Generation"],
+            github: "https://github.com/ayoub-rahmani/Radiology_Center",
+            demo: null,
+        },
+        {
+            name: "Snake Battle Arena",
+            period: "Nov 2025",
+            description:
+                "Real-time multiplayer Snake for up to 4 players over a custom TCP client-server. Pre-game lobby, server-side collision detection, live game-state broadcasting, and JavaFX rendering.",
+            stack: ["Java", "JavaFX", "TCP Sockets"],
+            github: null,
+            demo: null,
+        },
+    ]
 
-  const projects = [
-    {
-      icon: Car,
-      title: "Auto-École Manager",
-      description:
-        "Comprehensive driving school management system with integrated maps and email recovery functionality. Features student tracking, lesson scheduling, and administrative tools.",
-      tech: ["Java", "JavaFX", "MySQL"],
-      github: "https://github.com/ayoub-rahmani/Driving_school_Pro",
-      color: "bg-blue-500/10 border-blue-500/20",
-    },
-    {
-      icon: Truck,
-      title: "Deliverini TN",
-      description:
-        "Real-time delivery application with live tracking capabilities. Connects customers with delivery services through an intuitive mobile interface.",
-      tech: ["Flutter", "Firebase", "Firestore"],
-      github: "https://github.com/ayoub-rahmani/Deliverini_TN",
-      color: "bg-green-500/10 border-green-500/20",
-    },
-    {
-      icon: Heart,
-      title: "Radiology Center",
-      description:
-        "Medical facility management system with PDF reporting capabilities. Streamlines patient records, appointment scheduling, and report generation.",
-      tech: ["Java", "PDF Generation", "Data Management"],
-      github: "https://github.com/ayoub-rahmani/Radiology_Center",
-      color: "bg-red-500/10 border-red-500/20",
-    },
-    {
-      icon: CreditCard,
-      title: "Smart Checkout",
-      description:
-        "Smooth mobile checkout experience with elegant animations and user-friendly interface. Optimized for quick and secure transactions.",
-      tech: ["Flutter", "Dart", "Animations"],
-      github: "https://github.com/ayoub-rahmani/Smart_Checkout",
-      color: "bg-purple-500/10 border-purple-500/20",
-    },
-  ]
+    return (
+        <section
+            id="projects"
+            ref={sectionRef}
+            className="py-24 px-4 sm:px-6 lg:px-8"
+            style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(32px)", transition: "all 0.7s ease" }}
+        >
+            <div className="max-w-5xl mx-auto">
+                <div className="flex items-center gap-4 mb-16">
+                    <span className="font-mono text-sky-400 text-xs tracking-widest">03</span>
+                    <h2 className="font-mono text-xs tracking-widest text-slate-400 uppercase">Projects</h2>
+                    <div className="flex-1 h-px bg-slate-800" />
+                </div>
 
-  return (
-    <section id="projects" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className={`transition-all duration-1000 ${isVisible ? "animate-slide-up" : "opacity-0"}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Projects</h2>
-            <div className="w-20 h-1 bg-primary mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-              A showcase of my work spanning mobile applications, desktop software, and web solutions. Each project
-              demonstrates different aspects of my technical skills and problem-solving approach.
-            </p>
-          </div>
+                {/* Featured */}
+                <div className="grid md:grid-cols-2 gap-px bg-slate-800 mb-px">
+                    {featured.map((p) => (
+                        <div key={p.name} className="bg-[#0a0a0f] p-8 flex flex-col">
+                            <div className="flex items-start justify-between mb-2">
+                                <div>
+                                    <h3 className="text-white text-xl font-bold">{p.name}</h3>
+                                    <p className="text-sky-400 text-xs font-mono mt-0.5">{p.subtitle}</p>
+                                </div>
+                                <span className="font-mono text-slate-600 text-xs flex-shrink-0 ml-4">{p.period}</span>
+                            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <Card
-                key={index}
-                className={`group hover:shadow-xl transition-all duration-300 hover:scale-105 bg-card/50 backdrop-blur-sm border-border/50 ${project.color}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardHeader>
-                  <div className="flex items-center space-x-3 mb-2">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <project.icon className="h-5 w-5 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">{project.title}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4 text-pretty">{project.description}</p>
+                            {p.private && (
+                                <div className="flex items-center gap-1.5 text-slate-600 text-xs font-mono mb-3">
+                                    <Lock className="h-3 w-3" />
+                                    {p.privateNote}
+                                </div>
+                            )}
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
+                            <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">{p.description}</p>
+
+                            {p.highlight && (
+                                <div className="border-l-2 border-sky-400 pl-3 mb-6">
+                                    <span className="text-sky-400 text-xs font-mono">{p.highlight}</span>
+                                </div>
+                            )}
+
+                            <div className="flex flex-wrap gap-2">
+                                {p.stack.map((s) => (
+                                    <span key={s} className="font-mono text-xs text-slate-500 border border-slate-800 px-2 py-0.5">
+                    {s}
+                  </span>
+                                ))}
+                            </div>
+                        </div>
                     ))}
-                  </div>
+                </div>
 
-                  <div className="flex gap-3">
-                    <Button variant="outline" size="sm" asChild className="group/btn bg-transparent">
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
-                        Code
-                      </a>
-                    </Button>
-                    <Button size="sm" asChild className="group/btn">
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
-                        View Project
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                {/* Other projects grid */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800">
+                    {projects.map((p) => (
+                        <div key={p.name} className="bg-[#0a0a0f] p-6 flex flex-col hover:bg-slate-900/40 transition-colors group">
+                            <div className="flex items-start justify-between mb-3">
+                                <h3 className="text-white font-semibold">{p.name}</h3>
+                                <div className="flex items-center gap-2 ml-2 flex-shrink-0">
+                                    {p.github ? (
+                                        <a
+                                            href={p.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-slate-600 hover:text-sky-400 transition-colors"
+                                        >
+                                            <Github className="h-4 w-4" />
+                                        </a>
+                                    ) : (
+                                        <Lock className="h-3.5 w-3.5 text-slate-700" />
+                                    )}
+                                </div>
+                            </div>
+                            <span className="font-mono text-slate-600 text-xs mb-3">{p.period}</span>
+                            <p className="text-slate-500 text-xs leading-relaxed mb-4 flex-1">{p.description}</p>
+                            <div className="flex flex-wrap gap-1.5">
+                                {p.stack.map((s) => (
+                                    <span key={s} className="font-mono text-xs text-slate-600 border border-slate-800 px-1.5 py-0.5">
+                    {s}
+                  </span>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
-          <div className="mt-16 text-center">
-            <Card className="bg-card/30 backdrop-blur-sm border-border/50">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4">More Projects Coming Soon</h3>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto text-pretty">
-                  I'm constantly working on new projects and exploring innovative technologies. Follow my GitHub to stay
-                  updated with my latest work and contributions.
-                </p>
-                <Button variant="outline" asChild>
-                  <a href="https://github.com/ayoub-rahmani" target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 mr-2" />
-                    View All Projects
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+                {/* GitHub link */}
+                <div className="mt-10 flex justify-end">
+                    <a
+                        href="https://github.com/ayoub-rahmani"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 font-mono text-xs text-slate-500 hover:text-sky-400 transition-colors"
+                    >
+                        <Github className="h-3.5 w-3.5" />
+                        View all on GitHub
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                    </a>
+                </div>
+            </div>
+        </section>
+    )
 }

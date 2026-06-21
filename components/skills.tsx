@@ -1,110 +1,143 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 
 export function Skills() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+    const [isVisible, setIsVisible] = useState(false)
+    const sectionRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 },
-    )
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
+            { threshold: 0.1 }
+        )
+        if (sectionRef.current) observer.observe(sectionRef.current)
+        return () => observer.disconnect()
+    }, [])
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+    const categories = [
+        {
+            label: "Mobile",
+            items: ["React Native", "Flutter", "TypeScript", "Dart", "Android", "iOS"],
+            accent: "sky",
+        },
+        {
+            label: "Backend & APIs",
+            items: ["NestJS", "Node.js", "FastAPI", "REST", "TypeORM", "Swagger"],
+            accent: "violet",
+        },
+        {
+            label: "Databases",
+            items: ["PostgreSQL", "Firebase", "MySQL", "SQLite", "Firestore"],
+            accent: "emerald",
+        },
+        {
+            label: "AI & Integrations",
+            items: ["BioMistral 7B", "llama.cpp", "Jitsi Meet SDK", "FastAPI inference"],
+            accent: "amber",
+        },
+        {
+            label: "Tools & Methods",
+            items: ["Git", "Figma", "Postman", "K6", "Jira", "Scrum", "Docker", "BurpSuite"],
+            accent: "rose",
+        },
+        {
+            label: "Other Languages",
+            items: ["Java", "JavaFX", "Python", "C", "PHP", "C++"],
+            accent: "slate",
+        },
+    ]
+
+    const accentMap: Record<string, string> = {
+        sky: "text-sky-400 border-sky-500/20 bg-sky-500/5",
+        violet: "text-violet-400 border-violet-500/20 bg-violet-500/5",
+        emerald: "text-emerald-400 border-emerald-500/20 bg-emerald-500/5",
+        amber: "text-amber-400 border-amber-500/20 bg-amber-500/5",
+        rose: "text-rose-400 border-rose-500/20 bg-rose-500/5",
+        slate: "text-slate-400 border-slate-600/40 bg-slate-500/5",
     }
 
-    return () => observer.disconnect()
-  }, [])
+    const labelMap: Record<string, string> = {
+        sky: "text-sky-400",
+        violet: "text-violet-400",
+        emerald: "text-emerald-400",
+        amber: "text-amber-400",
+        rose: "text-rose-400",
+        slate: "text-slate-400",
+    }
 
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      skills: ["C", "Python", "Java", "Dart", "JavaScript", "PHP"],
-      color: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    },
-    {
-      title: "Frameworks & Mobile Development",
-      skills: ["Flutter", "JavaFX"],
-      color: "bg-green-500/10 text-green-400 border-green-500/20",
-    },
-    {
-      title: "AI Tools & Assistants",
-      skills: ["ChatGPT", "Claude", "DeepSeek", "Grok", "v0 AI"],
-      color: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-    },
-    {
-      title: "Web Technologies",
-      skills: ["HTML", "CSS", "JavaScript", "PHP"],
-      color: "bg-orange-500/10 text-orange-400 border-orange-500/20",
-    },
-    {
-      title: "Productivity & Multimedia Tools",
-      skills: ["Figma", "CapCut", "Excel", "Word", "PowerPoint"],
-      color: "bg-pink-500/10 text-pink-400 border-pink-500/20",
-    },
-  ]
+    return (
+        <section
+            id="skills"
+            ref={sectionRef}
+            className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0d0d14]"
+            style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(32px)", transition: "all 0.7s ease" }}
+        >
+            <div className="max-w-5xl mx-auto">
+                <div className="flex items-center gap-4 mb-16">
+                    <span className="font-mono text-sky-400 text-xs tracking-widest">02</span>
+                    <h2 className="font-mono text-xs tracking-widest text-slate-400 uppercase">Skills</h2>
+                    <div className="flex-1 h-px bg-slate-800" />
+                </div>
 
-  return (
-    <section id="skills" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
-      <div className="max-w-6xl mx-auto">
-        <div className={`transition-all duration-1000 ${isVisible ? "animate-slide-up" : "opacity-0"}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Technologies & Tools</h2>
-            <div className="w-20 h-1 bg-primary mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-              A comprehensive toolkit spanning programming languages, AI assistants, and creative tools that enable me
-              to build innovative solutions efficiently.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {skillCategories.map((category, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-lg transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/50"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4 text-center">{category.title}</h3>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {category.skills.map((skill, skillIndex) => (
-                      <Badge
-                        key={skillIndex}
-                        variant="outline"
-                        className={`${category.color} hover:scale-105 transition-transform cursor-default`}
-                      >
-                        {skill}
-                      </Badge>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-800">
+                    {categories.map((cat) => (
+                        <div key={cat.label} className="bg-[#0d0d14] p-6 hover:bg-slate-900/50 transition-colors">
+                            <h3 className={`font-mono text-xs tracking-widest uppercase mb-4 ${labelMap[cat.accent]}`}>
+                                {cat.label}
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {cat.items.map((item) => (
+                                    <span
+                                        key={item}
+                                        className={`text-xs px-2.5 py-1 border font-mono ${accentMap[cat.accent]}`}
+                                    >
+                    {item}
+                  </span>
+                                ))}
+                            </div>
+                        </div>
                     ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </div>
 
-          <div className="mt-12 text-center">
-            <Card className="bg-card/30 backdrop-blur-sm border-border/50">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4 gradient-text">AI-Enhanced Productivity</h3>
-                <p className="text-muted-foreground max-w-4xl mx-auto text-pretty">
-                  As an AI power user, I leverage cutting-edge tools like DeepSeek, ChatGPT, Claude, Grok, and v0 to
-                  accelerate development, solve complex problems, and enhance productivity. This allows me to focus on
-                  creative problem-solving while AI handles routine tasks and provides intelligent assistance.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+                {/* What I do well */}
+                <div className="mt-16 border border-slate-800 p-8">
+                    <h3 className="font-mono text-xs tracking-widest text-slate-500 uppercase mb-8">What I do well</h3>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {[
+                            {
+                                title: "Mobile-first thinking",
+                                desc: "Production React Native & Flutter apps — clean architecture, typed APIs, and polished UI across Android and iOS.",
+                            },
+                            {
+                                title: "Backend integration",
+                                desc: "NestJS APIs, PostgreSQL with TypeORM, REST design, Swagger docs, and K6 load testing.",
+                            },
+                            {
+                                title: "AI deployment",
+                                desc: "Running and integrating LLMs locally — BioMistral 7B via FastAPI and llama.cpp inside a mobile workflow.",
+                            },
+                            {
+                                title: "Real-time & video",
+                                desc: "Jitsi Meet SDK, Firebase real-time sync, push notifications, and live chat.",
+                            },
+                            {
+                                title: "UI from Figma",
+                                desc: "Translating designs into code — responsive interfaces, animations, multilingual and RTL support.",
+                            },
+                            {
+                                title: "Agile delivery",
+                                desc: "Scrum across 6 sprints, 4 releases, Jira tracking, and Postman API validation from day one.",
+                            },
+                        ].map((item) => (
+                            <div key={item.title}>
+                                <div className="text-white text-sm font-semibold mb-1.5">{item.title}</div>
+                                <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
 }

@@ -1,83 +1,101 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [activeSection, setActiveSection] = useState("")
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50)
 
-  const navItems = [
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
-  ]
+            const sections = ["about", "skills", "projects", "contact"]
+            for (const id of sections.reverse()) {
+                const el = document.getElementById(id)
+                if (el && window.scrollY >= el.offsetTop - 120) {
+                    setActiveSection(id)
+                    break
+                }
+            }
+        }
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
 
-  return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
-            <a href="#" className="text-xl font-bold gradient-text">
-              Ayoub Rahmani
-            </a>
-          </div>
+    const navItems = [
+        { href: "#about", label: "About" },
+        { href: "#skills", label: "Skills" },
+        { href: "#projects", label: "Projects" },
+        { href: "#contact", label: "Contact" },
+    ]
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
-                >
-                  {item.label}
-                </a>
-              ))}
+    return (
+        <nav
+            className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+                isScrolled
+                    ? "bg-[#0a0a0f]/90 backdrop-blur-md border-b border-slate-800"
+                    : "bg-transparent"
+            }`}
+        >
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
+                    <a href="#" className="font-mono text-sm text-sky-400 tracking-wider">
+                        AR<span className="text-slate-600">/</span>
+                    </a>
+
+                    {/* Desktop */}
+                    <div className="hidden md:flex items-center gap-8">
+                        {navItems.map((item) => {
+                            const id = item.href.slice(1)
+                            return (
+                                <a
+                                    key={item.href}
+                                    href={item.href}
+                                    className={`font-mono text-xs tracking-widest uppercase transition-colors duration-200 ${
+                                        activeSection === id
+                                            ? "text-sky-400"
+                                            : "text-slate-500 hover:text-slate-200"
+                                    }`}
+                                >
+                                    {item.label}
+                                </a>
+                            )
+                        })}
+                        <a
+                            href="mailto:ayoub.rahmani.dev@gmail.com"
+                            className="font-mono text-xs tracking-widest px-4 py-2 border border-sky-500/30 text-sky-400 hover:bg-sky-500/10 transition-colors"
+                        >
+                            Hire me
+                        </a>
+                    </div>
+
+                    {/* Mobile */}
+                    <button
+                        className="md:hidden text-slate-400 hover:text-white"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                    </button>
+                </div>
+
+                {isMobileMenuOpen && (
+                    <div className="md:hidden border-t border-slate-800 py-4 space-y-4 bg-[#0a0a0f]">
+                        {navItems.map((item) => (
+                            <a
+                                key={item.href}
+                                href={item.href}
+                                className="block font-mono text-xs tracking-widest uppercase text-slate-400 hover:text-white px-2 py-1"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                {item.label}
+                            </a>
+                        ))}
+                    </div>
+                )}
             </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-card border border-border rounded-lg mt-2">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
-  )
+        </nav>
+    )
 }

@@ -1,125 +1,182 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Brain, Code, Lightbulb, Rocket } from "lucide-react"
 
 export function About() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+    const [isVisible, setIsVisible] = useState(false)
+    const sectionRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.1 },
-    )
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
+            { threshold: 0.1 }
+        )
+        if (sectionRef.current) observer.observe(sectionRef.current)
+        return () => observer.disconnect()
+    }, [])
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
+    const experience = [
+        {
+            period: "Feb – Jun 2026",
+            role: "Mobile Developer Intern",
+            company: "MedCity Connect",
+            location: "Sfax, Tunisia",
+            tag: "Startup Act Certified · Healthtech",
+            points: [
+                "Built a production React Native app for doctors centralizing appointments, patient records, and secure messaging.",
+                "Integrated Jitsi Meet SDK for encrypted video teleconsultation and deployed BioMistral 7B via FastAPI + llama.cpp as an embedded AI clinical assistant.",
+                "Delivered across 4 releases and 6 Scrum sprints. K6 load test: p(95) at 282ms, 0% failure rate.",
+                "Final grade: 19/20 — highest score in graduating class.",
+            ],
+            stack: ["React Native", "TypeScript", "NestJS", "PostgreSQL", "Jitsi SDK", "BioMistral 7B"],
+        },
+    ]
 
-    return () => observer.disconnect()
-  }, [])
+    const education = [
+        {
+            period: "2022 – 2025",
+            degree: "B.Sc. Computer Engineering — Software & Information Systems (GLSI)",
+            school: "Faculty of Sciences of Bizerte · University of Carthage",
+            note: "Year Average: 16.70/20 · Ranked 3rd in class · Final Project: 19/20 Excellent",
+        },
+        {
+            period: "2023",
+            degree: "High School Diploma — Mathematics, Honours (Mention Bien)",
+            school: "Pioneer High School of Medenine",
+            note: "Average: 15.81/20",
+        },
+    ]
 
-  const highlights = [
-    {
-      icon: Brain,
-      title: "AI Power User",
-      description:
-        "Highly proficient in leveraging cutting-edge AI tools (DeepSeek, ChatGPT, Claude, Grok, v0) to accelerate development and solve complex problems.",
-    },
-    {
-      icon: Code,
-      title: "Full-Stack Development",
-      description:
-        "From mobile apps with Flutter to desktop applications with JavaFX, I love building complete solutions.",
-    },
-    {
-      icon: Lightbulb,
-      title: "Creative Problem Solver",
-      description:
-        "I thrive on turning innovative ideas into functional, user-friendly applications that make a difference.",
-    },
-    {
-      icon: Rocket,
-      title: "Eager Learner",
-      description:
-        "Incredibly excited to learn new technologies and take on challenging projects. I love stepping out of my comfort zone!",
-    },
-  ]
+    const activities = [
+        "Enactus — Project Team Co-Leader",
+        "Google Developer Groups (GDG) — Event Organizer",
+        "Art of Code Club — Competitive Programming",
+        "Open Source — GitHub Contributor",
+    ]
 
-  return (
-    <section id="about" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className={`transition-all duration-1000 ${isVisible ? "animate-slide-up" : "opacity-0"}`}>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
-            <div className="w-20 h-1 bg-primary mx-auto mb-8"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto text-pretty">
-              I'm currently pursuing a degree in{" "}
-              <span className="text-primary font-semibold">Computer Engineering (GLSI)</span> at Faculté des Sciences de
-              Bizerte. I love turning ideas into reality with code, focusing on mobile apps and desktop software.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {highlights.map((item, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-lg transition-all duration-300 hover:scale-105 bg-card/50 backdrop-blur-sm border-border/50"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <item.icon className="h-6 w-6 text-primary" />
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                      <p className="text-muted-foreground text-pretty">{item.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-16 text-center">
-            <Card className="bg-card/30 backdrop-blur-sm border-border/50">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4">What I Bring to the Table</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-                  <div>
-                    <h4 className="font-semibold text-primary mb-2">Efficient Development</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Expert at using AI assistants to write cleaner code, debug faster, and learn new technologies
-                      quickly.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-primary mb-2">Full-Stack Capabilities</h4>
-                    <p className="text-sm text-muted-foreground">
-                      From mobile apps with Flutter to desktop applications with JavaFX and web technologies.
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-primary mb-2">Growth Mindset</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Highly motivated to learn new technologies and tackle unfamiliar challenges with enthusiasm.
-                    </p>
-                  </div>
+    return (
+        <section
+            id="about"
+            ref={sectionRef}
+            className="py-24 px-4 sm:px-6 lg:px-8"
+            style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(32px)", transition: "all 0.7s ease" }}
+        >
+            <div className="max-w-5xl mx-auto">
+                {/* Section label */}
+                <div className="flex items-center gap-4 mb-16">
+                    <span className="font-mono text-sky-400 text-xs tracking-widest">01</span>
+                    <h2 className="font-mono text-xs tracking-widest text-slate-400 uppercase">About</h2>
+                    <div className="flex-1 h-px bg-slate-800" />
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
+
+                <div className="grid lg:grid-cols-[1fr_340px] gap-16">
+                    {/* Left: bio + experience */}
+                    <div>
+                        <p className="text-slate-300 text-lg leading-relaxed mb-12 max-w-prose">
+                            I'm a Computer Engineering graduate from the University of Carthage, Tunisia, specializing in mobile development.
+                            I build cross-platform apps with React Native and Flutter — from database design to production deployment.
+                            Comfortable across the full stack, with hands-on experience integrating AI models into real mobile workflows.
+                        </p>
+
+                        {/* Experience */}
+                        <h3 className="font-mono text-xs tracking-widest text-slate-500 uppercase mb-8">Experience</h3>
+                        <div className="space-y-10">
+                            {experience.map((exp, i) => (
+                                <div key={i} className="relative pl-6 border-l border-slate-800">
+                                    <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-sky-400" />
+                                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
+                                        <span className="font-mono text-sky-400 text-sm">{exp.period}</span>
+                                        <span className="text-white font-semibold">{exp.role}</span>
+                                    </div>
+                                    <div className="text-slate-400 text-sm mb-1">{exp.company} · {exp.location}</div>
+                                    <div className="font-mono text-xs text-slate-600 mb-4">{exp.tag}</div>
+                                    <ul className="space-y-2 mb-4">
+                                        {exp.points.map((pt, j) => (
+                                            <li key={j} className="text-slate-400 text-sm flex gap-3">
+                                                <span className="text-sky-400/60 mt-1 flex-shrink-0">›</span>
+                                                {pt}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="flex flex-wrap gap-2">
+                                        {exp.stack.map((s) => (
+                                            <span key={s} className="font-mono text-xs text-slate-500 border border-slate-800 px-2 py-0.5">
+                        {s}
+                      </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Education */}
+                        <h3 className="font-mono text-xs tracking-widest text-slate-500 uppercase mt-14 mb-8">Education</h3>
+                        <div className="space-y-8">
+                            {education.map((edu, i) => (
+                                <div key={i} className="relative pl-6 border-l border-slate-800">
+                                    <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-sky-400 bg-[#0a0a0f]" />
+                                    <span className="font-mono text-sky-400 text-sm">{edu.period}</span>
+                                    <div className="text-white font-semibold mt-1">{edu.degree}</div>
+                                    <div className="text-slate-400 text-sm mt-0.5">{edu.school}</div>
+                                    <div className="font-mono text-xs text-slate-600 mt-1">{edu.note}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right: sidebar */}
+                    <div className="space-y-8">
+                        {/* Certifications */}
+                        <div className="border border-slate-800 p-6">
+                            <h3 className="font-mono text-xs tracking-widest text-slate-500 uppercase mb-5">Certifications</h3>
+                            <div className="space-y-4">
+                                <div>
+                                    <div className="text-white text-sm font-semibold">IELTS Academic</div>
+                                    <div className="text-slate-400 text-xs mt-0.5">British Council / IDP · May 2026</div>
+                                    <div className="font-mono text-sky-400 text-xs mt-1">Band 7.0 · CEFR C1</div>
+                                    <div className="font-mono text-slate-600 text-xs">L:8.5 R:7.5 W:6.5 S:6.0</div>
+                                </div>
+                                <div className="border-t border-slate-800 pt-4">
+                                    <div className="text-white text-sm font-semibold">Microsoft Office Specialist</div>
+                                    <div className="text-slate-400 text-xs mt-0.5">Certiport · Word, Excel, PowerPoint</div>
+                                    <div className="font-mono text-sky-400 text-xs mt-1">900+ / 1000</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Languages */}
+                        <div className="border border-slate-800 p-6">
+                            <h3 className="font-mono text-xs tracking-widest text-slate-500 uppercase mb-5">Languages</h3>
+                            <div className="space-y-2.5">
+                                {[
+                                    { lang: "Arabic", level: "Native" },
+                                    { lang: "French", level: "Fluent" },
+                                    { lang: "English", level: "C1 · IELTS 7.0" },
+                                    { lang: "German", level: "Basic (A2)" },
+                                ].map(({ lang, level }) => (
+                                    <div key={lang} className="flex justify-between items-center">
+                                        <span className="text-slate-300 text-sm">{lang}</span>
+                                        <span className="font-mono text-xs text-slate-500">{level}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Activities */}
+                        <div className="border border-slate-800 p-6">
+                            <h3 className="font-mono text-xs tracking-widest text-slate-500 uppercase mb-5">Activities</h3>
+                            <ul className="space-y-2.5">
+                                {activities.map((a) => (
+                                    <li key={a} className="text-slate-400 text-xs flex gap-2">
+                                        <span className="text-sky-400 flex-shrink-0">›</span>
+                                        {a}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
 }
